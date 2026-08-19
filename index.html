@@ -1,624 +1,558 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Muhammad Awais | Portfolio</title>
+  <title>Muhammad Awais | Portfolio</title>
+  <meta name="description" content="Official portfolio of Muhammad Awais, a Virtual Assistant, Team Leader and Marketing Specialist interested in AI, automation, digital marketing and technology.">
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            scroll-behavior: smooth;
-        }
+  <!-- Open Graph metadata: this is what shows up as a preview card when the link
+       is shared on WhatsApp, LinkedIn, Facebook, etc. -->
+  <meta property="og:title" content="Muhammad Awais | Portfolio">
+  <meta property="og:description" content="Virtual Assistant, Team Leader & Marketing Specialist. Passionate about AI, automation, digital marketing and technology.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://awais-liaqat.github.io/">
 
-        body {
-            font-family: Arial, Helvetica, sans-serif;
-            background: #f5f7fa;
-            color: #1f2937;
-            line-height: 1.6;
-        }
+  <!-- Favicon: shows in the browser tab. This is a simple CSS-based "AL" monogram
+       encoded directly as an SVG so you don't need a separate image file yet.
+       You can replace it later with a real .ico or .png if you want. -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2222%22 fill=%22%230A0E14%22/><text x=%2250%22 y=%2266%22 font-family=%22Arial%22 font-weight=%22700%22 font-size=%2244%22 fill=%22%234C8DFF%22 text-anchor=%22middle%22>AL</text></svg>">
 
-        header {
-            background: #111827;
-            color: white;
-            padding: 20px 8%;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
+  <!-- Fonts: Space Grotesk for headings (technical, geometric feel),
+       Inter for body text (stays highly readable at small sizes). -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-        }
+  <!-- Google model-viewer: the library that renders the 3D avatar (.glb file).
+       It's a single <script> tag - no build tools or npm needed. Explained
+       fully in README.md. Loaded with 'defer' so it doesn't block the page
+       from displaying while it downloads. -->
+  <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js" defer></script>
 
-        .logo {
-            font-size: 24px;
-            font-weight: bold;
-        }
-
-        nav ul {
-            list-style: none;
-            display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-
-        nav a {
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-        }
-
-        nav a:hover {
-            color: #60a5fa;
-        }
-
-        .hero {
-            min-height: 90vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 60px 20px;
-            background: linear-gradient(135deg, #111827, #2563eb);
-            color: white;
-        }
-
-        .hero-content {
-            max-width: 800px;
-        }
-
-        .hero h1 {
-            font-size: 55px;
-            margin-bottom: 15px;
-        }
-
-        .hero h2 {
-            font-size: 24px;
-            font-weight: normal;
-            margin-bottom: 20px;
-        }
-
-        .hero p {
-            font-size: 18px;
-            margin-bottom: 30px;
-        }
-
-        .button {
-            display: inline-block;
-            padding: 12px 25px;
-            background: white;
-            color: #1d4ed8;
-            text-decoration: none;
-            border-radius: 8px;
-            font-weight: bold;
-            margin: 5px;
-        }
-
-        .button:hover {
-            transform: translateY(-2px);
-        }
-
-        section {
-            padding: 70px 8%;
-            max-width: 1200px;
-            margin: auto;
-        }
-
-        section h2 {
-            text-align: center;
-            font-size: 34px;
-            margin-bottom: 40px;
-            color: #111827;
-        }
-
-        .about {
-            max-width: 850px;
-            margin: auto;
-            text-align: center;
-            font-size: 18px;
-        }
-
-        .cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-        }
-
-        .card {
-            background: white;
-            padding: 25px;
-            border-radius: 12px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-        }
-
-        .card h3 {
-            color: #2563eb;
-            margin-bottom: 8px;
-        }
-
-        .card h4 {
-            margin-bottom: 10px;
-            color: #374151;
-        }
-
-        .skills {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 12px;
-        }
-
-        .skill {
-            background: white;
-            padding: 12px 18px;
-            border-radius: 25px;
-            box-shadow: 0 3px 12px rgba(0,0,0,0.08);
-            font-weight: bold;
-        }
-
-        .timeline-item {
-            background: white;
-            padding: 25px;
-            margin-bottom: 20px;
-            border-left: 5px solid #2563eb;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.07);
-        }
-
-        .timeline-item h3 {
-            color: #2563eb;
-        }
-
-        .award {
-            text-align: center;
-        }
-
-        .award h3 {
-            font-size: 22px;
-            color: #2563eb;
-        }
-
-        .contact {
-            text-align: center;
-            background: #111827;
-            color: white;
-            max-width: none;
-        }
-
-        .contact h2 {
-            color: white;
-        }
-
-        .contact a {
-            color: #93c5fd;
-            text-decoration: none;
-        }
-
-        footer {
-            text-align: center;
-            padding: 25px;
-            background: #030712;
-            color: white;
-        }
-
-        @media (max-width: 700px) {
-            .hero h1 {
-                font-size: 38px;
-            }
-
-            .hero h2 {
-                font-size: 20px;
-            }
-
-            nav {
-                gap: 15px;
-            }
-
-            nav ul {
-                gap: 10px;
-                font-size: 14px;
-            }
-        }
-    </style>
+  <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-    <!-- NAVIGATION -->
-    <header>
-        <nav>
-            <div class="logo">Muhammad Awais</div>
+  <!-- Skip link: lets keyboard and screen-reader users jump straight to the
+       main content, bypassing the navigation. Only becomes visible when
+       focused (Tab key). This is an accessibility requirement, not decoration. -->
+  <a href="#home" class="skip-link">Skip to main content</a>
 
-            <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#experience">Experience</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#education">Education</a></li>
-                <li><a href="#awards">Awards</a></li>
-                <li><a href="#contact">Contact</a></li>
+  <!-- ============================================================
+       NAVIGATION
+       ============================================================ -->
+  <header class="nav-wrap">
+    <nav class="nav" aria-label="Primary">
+      <a href="#home" class="nav-logo" aria-label="Awais Liaqat, home">
+        <span class="nav-logo-mark">AL</span>
+      </a>
+
+      <!-- Desktop links -->
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#home" class="nav-link" data-section="home">Home</a></li>
+        <li><a href="#about" class="nav-link" data-section="about">About</a></li>
+        <li><a href="#experience" class="nav-link" data-section="experience">Experience</a></li>
+        <li><a href="#skills" class="nav-link" data-section="skills">Skills</a></li>
+        <li><a href="#education" class="nav-link" data-section="education">Education</a></li>
+        <li><a href="#awards" class="nav-link" data-section="awards">Awards</a></li>
+        <li><a href="#projects" class="nav-link" data-section="projects">Projects</a></li>
+        <li><a href="#world3d" class="nav-link" data-section="world3d">3D World</a></li>
+        <li><a href="#contact" class="nav-link" data-section="contact">Contact</a></li>
+      </ul>
+
+      <!-- Hamburger button: controls the mobile menu. aria-expanded is updated
+           by JavaScript so screen readers know if the menu is open or closed. -->
+      <button
+        type="button"
+        class="nav-toggle"
+        id="nav-toggle"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+        aria-label="Open menu"
+      >
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+      </button>
+    </nav>
+
+    <!-- Mobile menu panel: hidden by default, drops down from the top when
+         the hamburger button is pressed. Duplicates the same links as the
+         desktop nav (this is intentional - two lists, one for each layout). -->
+    <div class="mobile-menu" id="mobile-menu" hidden>
+      <ul class="mobile-menu-links">
+        <li><a href="#home" class="mobile-menu-link">Home</a></li>
+        <li><a href="#about" class="mobile-menu-link">About</a></li>
+        <li><a href="#experience" class="mobile-menu-link">Experience</a></li>
+        <li><a href="#skills" class="mobile-menu-link">Skills</a></li>
+        <li><a href="#education" class="mobile-menu-link">Education</a></li>
+        <li><a href="#awards" class="mobile-menu-link">Awards</a></li>
+        <li><a href="#projects" class="mobile-menu-link">Projects</a></li>
+        <li><a href="#world3d" class="mobile-menu-link">3D World</a></li>
+        <li><a href="#contact" class="mobile-menu-link">Contact</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main id="home">
+
+    <!-- ============================================================
+         HERO
+         ============================================================ -->
+    <section class="hero" aria-label="Introduction">
+      <div class="hero-bg" aria-hidden="true">
+        <div class="hero-grid"></div>
+        <div class="hero-blob hero-blob-a"></div>
+        <div class="hero-blob hero-blob-b"></div>
+      </div>
+
+      <div class="hero-inner container">
+        <div class="hero-text">
+          <p class="eyebrow">Hello, I'm</p>
+
+          <!-- EDIT PERSONAL INFORMATION -->
+          <h1 class="hero-name">Muhammad Awais</h1>
+          <p class="hero-title">Virtual Assistant | Team Leader | Marketing Specialist</p>
+
+          <p class="hero-desc">
+            Passionate about AI, automation, digital marketing, leadership,
+            technology, and continuous learning.
+          </p>
+
+          <div class="hero-actions">
+            <a href="#projects" class="btn btn-primary">Explore My Portfolio</a>
+            <a href="#contact" class="btn btn-ghost">Contact Me</a>
+          </div>
+
+          <div class="status-chip">
+            <span class="status-dot" aria-hidden="true"></span>
+            Available for Opportunities
+          </div>
+        </div>
+
+        <div class="hero-avatar-wrap">
+          <!-- The 3D avatar viewer. If assets/models/avatar.glb doesn't exist,
+               script.js detects the load failure and shows the fallback panel
+               below instead. See README.md Part 8 for how to add your model. -->
+          <div class="avatar-stage" id="hero-avatar-stage">
+            <model-viewer
+              id="hero-model-viewer"
+              class="model-viewer-el"
+              src="assets/models/avatar.glb"
+              alt="Interactive 3D avatar of Muhammad Awais"
+              camera-controls
+              touch-action="pan-y"
+              auto-rotate
+              auto-rotate-delay="0"
+              rotation-per-second="18deg"
+              shadow-intensity="0.8"
+              exposure="1"
+              interaction-prompt="none"
+              disable-zoom
+            ></model-viewer>
+
+            <div class="avatar-loading" id="hero-avatar-loading">
+              <span class="spinner" aria-hidden="true"></span>
+              <span>Loading 3D avatar…</span>
+            </div>
+
+            <div class="avatar-fallback" id="hero-avatar-fallback" hidden>
+              <span class="avatar-fallback-mark">AL</span>
+              <p>Add <code>avatar.glb</code> to <code>assets/models/</code> to display the 3D character.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <a href="#about" class="scroll-cue" aria-label="Scroll to About section">
+        <span></span>
+      </a>
+    </section>
+
+    <!-- ============================================================
+         ABOUT
+         ============================================================ -->
+    <section id="about" class="section" aria-labelledby="about-heading">
+      <div class="container">
+        <p class="section-eyebrow">About</p>
+        <h2 id="about-heading" class="section-title">About Me</h2>
+
+        <div class="about-grid">
+          <div class="about-copy reveal">
+            <p>
+              I'm a dynamic professional with experience in leadership, sales,
+              digital marketing, virtual assistance, remote operations,
+              administration, client communication, and team management.
+            </p>
+            <p>
+              I'm passionate about AI, automation, Agentic AI, Generative AI,
+              digital marketing, e-commerce, technology, and continuous learning.
+            </p>
+            <p class="about-interests-label">Interests</p>
+            <ul class="pill-list">
+              <li class="pill">AI</li>
+              <li class="pill">AI Automation</li>
+              <li class="pill">Agentic AI</li>
+              <li class="pill">Generative AI</li>
+              <li class="pill">Digital Marketing</li>
+              <li class="pill">Sales</li>
+              <li class="pill">Leadership</li>
+              <li class="pill">E-commerce</li>
+              <li class="pill">Technology</li>
+              <li class="pill">Web Development</li>
             </ul>
-        </nav>
-    </header>
-
-
-    <!-- HOME -->
-    <section class="hero" id="home">
-        <div class="hero-content">
-
-            <h1>Hi, I'm Muhammad Awais</h1>
-
-            <h2>
-                Virtual Assistant | Team Leader | Marketing Specialist
-            </h2>
-
-            <p>
-                Welcome to my personal portfolio. I am passionate about
-                leadership, sales, digital marketing, AI, automation,
-                technology, and continuous learning.
-            </p>
-
-            <a class="button" href="#about">Explore My Portfolio</a>
-
-            <a class="button" href="#contact">Contact Me</a>
-
-        </div>
-    </section>
-
-
-    <!-- ABOUT -->
-    <section id="about">
-
-        <h2>About Me</h2>
-
-        <div class="about">
-
-            <p>
-                I am Muhammad Awais, a Virtual Assistant, Team Leader,
-                and Marketing Specialist based in Lahore, Pakistan.
-            </p>
-
-            <br>
-
-            <p>
-                I have experience in remote operations, administration,
-                sales, marketing, team leadership, client communication,
-                and digital work.
-            </p>
-
-            <br>
-
-            <p>
-                I am also interested in AI Automation, Agentic AI,
-                Generative AI, e-commerce, social media marketing,
-                and technology.
-            </p>
-
-            <br>
-
-            <p>
-                My goal is to continuously develop my skills, take on
-                challenging projects, and build useful solutions while
-                learning new technologies.
-            </p>
-
-            <br>
-
-            <p>
-                <strong>My philosophy:</strong>
-                "Be perfect wherever you are."
-            </p>
-
-        </div>
-
-    </section>
-
-
-    <!-- EXPERIENCE -->
-    <section id="experience">
-
-        <h2>Work Experience</h2>
-
-        <div class="timeline-item">
-
-            <h3>Virtual Assistant & Manager</h3>
-
-            <h4>Self-Employed / Remote | 2023 – 2026</h4>
-
-            <p>
-                Managed administrative operations, coordinated schedules,
-                and handled client communication across remote projects.
-            </p>
-
-        </div>
-
-
-        <div class="timeline-item">
-
-            <h3>Marketing Manager & Specialist</h3>
-
-            <h4>Studio Shade | 2023 – 2026</h4>
-
-            <p>
-                Maintained brand consistency, built vendor and agency
-                partnerships, and coordinated multi-channel marketing
-                campaigns.
-            </p>
-
-        </div>
-
-
-        <div class="timeline-item">
-
-            <h3>Sales Representative & Team Leader</h3>
-
-            <h4>Sales Division | 2025 · 3 Months</h4>
-
-            <p>
-                Led a 14-member sales team and worked toward exceeding
-                sales targets. Earned the Salesman of the Month award
-                in 2025.
-            </p>
-
-        </div>
-
-
-        <div class="timeline-item">
-
-            <h3>Community Volunteer</h3>
-
-            <h4>Youth Force | 2025</h4>
-
-            <p>
-                Contributed to community well-being initiatives and
-                demonstrated leadership through volunteer activities.
-            </p>
-
-        </div>
-
-
-        <div class="timeline-item">
-
-            <h3>Worker</h3>
-
-            <h4>Helping Hands | 2022 – 2023</h4>
-
-            <p>
-                Completed assigned tasks within deadlines while
-                maintaining quality and safety standards.
-            </p>
-
-        </div>
-
-    </section>
-
-
-    <!-- SKILLS -->
-    <section id="skills">
-
-        <h2>My Skills</h2>
-
-        <div class="skills">
-
-            <div class="skill">Team Leadership</div>
-
-            <div class="skill">Sales & Communication</div>
-
-            <div class="skill">AI Automation</div>
-
-            <div class="skill">Agentic AI</div>
-
-            <div class="skill">Generative AI</div>
-
-            <div class="skill">Social Media Marketing</div>
-
-            <div class="skill">E-commerce</div>
-
-            <div class="skill">Video Editing</div>
-
-            <div class="skill">Time Management</div>
-
-            <div class="skill">MS Office</div>
-
-            <div class="skill">Email Handling</div>
-
-            <div class="skill">Data Entry</div>
-
-        </div>
-
-    </section>
-
-
-    <!-- EDUCATION -->
-    <section id="education">
-
-        <h2>Education</h2>
-
-        <div class="cards">
-
-            <div class="card">
-
-                <h3>ICS with Physics</h3>
-
-                <h4>
-                    Govt. Graduate College of Science
-                </h4>
-
-                <p>
-                    Lahore
-                </p>
-
-                <p>
-                    2025 – Present
-                </p>
-
-                <p>
-                    Currently studying in the second year of
-                    Intermediate/ICS with Physics.
-                </p>
-
+          </div>
+
+          <!-- Dashboard-style stat tiles instead of icon paragraphs -
+               this is the site's visual signature applied at section scale. -->
+          <div class="stat-grid reveal">
+            <div class="stat-card">
+              <p class="stat-value">14+</p>
+              <p class="stat-label">Team Members Led</p>
             </div>
-
-
-            <div class="card">
-
-                <h3>Matric — Science</h3>
-
-                <h4>
-                    Dawood Education Complex H/S/S for Boys
-                </h4>
-
-                <p>
-                    Pakpattan
-                </p>
-
-                <p>
-                    Completed in 2025
-                </p>
-
+            <div class="stat-card">
+              <p class="stat-value">2025</p>
+              <p class="stat-label">Award Recognition</p>
             </div>
-
+            <div class="stat-card stat-card-wide">
+              <p class="stat-value stat-value-sm">AI + Marketing + Leadership</p>
+              <p class="stat-label">Professional Focus</p>
+            </div>
+            <div class="stat-card stat-card-wide">
+              <p class="stat-value stat-value-sm">Continuous Learning</p>
+              <p class="stat-label">Current Development</p>
+            </div>
+          </div>
         </div>
-
+      </div>
     </section>
 
+    <!-- ============================================================
+         EXPERIENCE
+         ============================================================ -->
+    <section id="experience" class="section section-alt" aria-labelledby="experience-heading">
+      <div class="container">
+        <p class="section-eyebrow">Experience</p>
+        <h2 id="experience-heading" class="section-title">Where I've Worked</h2>
 
-    <!-- LANGUAGES -->
-    <section>
-
-        <h2>Languages</h2>
-
-        <div class="skills">
-
-            <div class="skill">English — Fluent</div>
-
-            <div class="skill">Urdu — Fluent</div>
-
-            <div class="skill">Punjabi — Fluent</div>
-
-        </div>
-
+        <ol class="timeline">
+          <li class="timeline-item reveal">
+            <div class="timeline-node" aria-hidden="true"></div>
+            <div class="timeline-card">
+              <p class="timeline-period">2023 – 2026</p>
+              <h3 class="timeline-role">Virtual Assistant &amp; Manager</h3>
+              <p class="timeline-org">Self-Employed / Remote</p>
+            </div>
+          </li>
+          <li class="timeline-item reveal">
+            <div class="timeline-node" aria-hidden="true"></div>
+            <div class="timeline-card">
+              <p class="timeline-period">2023 – 2026</p>
+              <h3 class="timeline-role">Marketing Manager &amp; Specialist</h3>
+              <p class="timeline-org">Studio Shade</p>
+            </div>
+          </li>
+          <li class="timeline-item reveal">
+            <div class="timeline-node" aria-hidden="true"></div>
+            <div class="timeline-card">
+              <p class="timeline-period">2025 — 3 Months</p>
+              <h3 class="timeline-role">Sales Representative &amp; Team Leader</h3>
+              <p class="timeline-org">Sales Division</p>
+            </div>
+          </li>
+          <li class="timeline-item reveal">
+            <div class="timeline-node" aria-hidden="true"></div>
+            <div class="timeline-card">
+              <p class="timeline-period">2025</p>
+              <h3 class="timeline-role">Community Volunteer</h3>
+              <p class="timeline-org">Youth Force</p>
+            </div>
+          </li>
+          <li class="timeline-item reveal">
+            <div class="timeline-node" aria-hidden="true"></div>
+            <div class="timeline-card">
+              <p class="timeline-period">2022 – 2023</p>
+              <h3 class="timeline-role">Worker</h3>
+              <p class="timeline-org">Helping Hands</p>
+            </div>
+          </li>
+        </ol>
+      </div>
     </section>
 
+    <!-- ============================================================
+         SKILLS
+         ============================================================ -->
+    <section id="skills" class="section" aria-labelledby="skills-heading">
+      <div class="container">
+        <p class="section-eyebrow">Skills</p>
+        <h2 id="skills-heading" class="section-title">What I Work With</h2>
 
-    <!-- AWARDS -->
-    <section id="awards">
-
-        <h2>Achievements & Awards</h2>
-
-        <div class="cards">
-
-            <div class="card award">
-
-                <h3>Salesman of the Month</h3>
-
-                <p>
-                    Sales Division — 2025
-                </p>
-
-                <p>
-                    Recognized for sales performance and achievement.
-                </p>
-
-            </div>
-
-
-            <div class="card award">
-
-                <h3>Best Team Leader Award</h3>
-
-                <p>
-                    Youth Force — 2025
-                </p>
-
-                <p>
-                    Recognized for leadership and initiative in
-                    community activities.
-                </p>
-
-            </div>
-
+        <div class="skills-grid">
+          <div class="skill-group reveal">
+            <h3 class="skill-group-title">Leadership</h3>
+            <ul class="pill-list">
+              <li class="pill">Team Leadership</li>
+              <li class="pill">Communication</li>
+              <li class="pill">Time Management</li>
+            </ul>
+          </div>
+          <div class="skill-group reveal">
+            <h3 class="skill-group-title">Sales &amp; Business</h3>
+            <ul class="pill-list">
+              <li class="pill">Sales</li>
+              <li class="pill">Client Communication</li>
+              <li class="pill">E-commerce</li>
+            </ul>
+          </div>
+          <div class="skill-group reveal">
+            <h3 class="skill-group-title">Marketing</h3>
+            <ul class="pill-list">
+              <li class="pill">Social Media Marketing</li>
+              <li class="pill">Digital Marketing</li>
+            </ul>
+          </div>
+          <div class="skill-group reveal">
+            <h3 class="skill-group-title">AI &amp; Technology</h3>
+            <ul class="pill-list">
+              <li class="pill pill-accent">AI Automation</li>
+              <li class="pill pill-accent">Agentic AI</li>
+              <li class="pill pill-accent">Generative AI</li>
+            </ul>
+          </div>
+          <div class="skill-group reveal">
+            <h3 class="skill-group-title">Creative</h3>
+            <ul class="pill-list">
+              <li class="pill">Video Editing</li>
+            </ul>
+          </div>
+          <div class="skill-group reveal">
+            <h3 class="skill-group-title">Administration</h3>
+            <ul class="pill-list">
+              <li class="pill">Data Entry</li>
+              <li class="pill">Email Handling</li>
+              <li class="pill">MS Office</li>
+            </ul>
+          </div>
         </div>
-
+      </div>
     </section>
 
+    <!-- ============================================================
+         EDUCATION
+         ============================================================ -->
+    <section id="education" class="section section-alt" aria-labelledby="education-heading">
+      <div class="container">
+        <p class="section-eyebrow">Education</p>
+        <h2 id="education-heading" class="section-title">Education</h2>
 
-    <!-- FUTURE PROJECTS -->
-    <section>
+        <div class="edu-grid">
+          <div class="edu-card reveal">
+            <p class="edu-period">2025 – Present</p>
+            <h3 class="edu-name">ICS with Physics</h3>
+            <p class="edu-org">Govt. Graduate College of Science, Lahore</p>
+            <p class="edu-note">Currently studying second year.</p>
+          </div>
+          <div class="edu-card reveal">
+            <p class="edu-period">Completed 2025</p>
+            <h3 class="edu-name">Matric — Science</h3>
+            <p class="edu-org">Dawood Education Complex H/S/S for Boys, Pakpattan</p>
+          </div>
+        </div>
 
-        <h2>Projects & Future Work</h2>
+        <p class="section-eyebrow section-eyebrow-spaced">Languages</p>
+        <div class="lang-grid">
+          <div class="lang-card reveal">
+            <p class="lang-name">English</p>
+            <p class="lang-level">Fluent</p>
+          </div>
+          <div class="lang-card reveal">
+            <p class="lang-name">Urdu</p>
+            <p class="lang-level">Fluent</p>
+          </div>
+          <div class="lang-card reveal">
+            <p class="lang-name">Punjabi</p>
+            <p class="lang-level">Fluent</p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-        <div class="about">
+    <!-- ============================================================
+         AWARDS
+         ============================================================ -->
+    <section id="awards" class="section" aria-labelledby="awards-heading">
+      <div class="container">
+        <p class="section-eyebrow">Awards</p>
+        <h2 id="awards-heading" class="section-title">Recognition</h2>
 
-            <p>
-                I am continuously learning and building new projects
-                in web development, AI, automation, digital marketing,
-                and technology.
+        <div class="awards-grid">
+          <div class="award-card reveal">
+            <span class="status-dot status-dot-ember" aria-hidden="true"></span>
+            <div>
+              <h3 class="award-name">Salesman of the Month</h3>
+              <p class="award-org">Sales Division · 2025</p>
+            </div>
+          </div>
+          <div class="award-card reveal">
+            <span class="status-dot status-dot-ember" aria-hidden="true"></span>
+            <div>
+              <h3 class="award-name">Best Team Leader Award</h3>
+              <p class="award-org">Youth Force · 2025</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         PROJECTS
+         ============================================================ -->
+    <section id="projects" class="section section-alt" aria-labelledby="projects-heading">
+      <div class="container">
+        <p class="section-eyebrow">Projects</p>
+        <h2 id="projects-heading" class="section-title">Projects</h2>
+        <p class="section-lede">
+          I'm still growing my technical skills, so the areas below are where
+          I'm actively building — not a list of finished client work.
+        </p>
+
+        <!-- EDIT PROJECTS: replace the four cards below as you complete
+             real projects. Each card is self-contained, so you can copy,
+             edit, or delete one without touching the others. -->
+        <div class="projects-grid">
+          <div class="project-card reveal">
+            <p class="project-tag">In Progress</p>
+            <h3 class="project-name">AI &amp; Automation</h3>
+            <p class="project-desc">
+              Exploring intelligent automation, AI workflows, Agentic AI,
+              and productivity solutions.
             </p>
-
-            <br>
-
-            <p>
-                This section will be updated as I complete and publish
-                new projects.
+          </div>
+          <div class="project-card reveal">
+            <p class="project-tag">In Progress</p>
+            <h3 class="project-name">Web Development</h3>
+            <p class="project-desc">
+              Websites and interactive projects created while developing my
+              web development skills.
             </p>
-
+          </div>
+          <div class="project-card reveal">
+            <p class="project-tag">In Progress</p>
+            <h3 class="project-name">Digital Marketing</h3>
+            <p class="project-desc">
+              Marketing, social media, e-commerce, and brand-related projects.
+            </p>
+          </div>
+          <div class="project-card reveal">
+            <p class="project-tag">In Progress</p>
+            <h3 class="project-name">3D Web Experiences</h3>
+            <p class="project-desc">
+              Interactive 3D experiments and personal web experiences.
+            </p>
+          </div>
         </div>
 
+        <p class="projects-more">More projects coming soon.</p>
+      </div>
     </section>
 
+    <!-- ============================================================
+         3D WORLD
+         ============================================================ -->
+    <section id="world3d" class="section world3d-section" aria-labelledby="world3d-heading">
+      <div class="container">
+        <p class="section-eyebrow">3D World</p>
+        <h2 id="world3d-heading" class="section-title">My 3D World</h2>
+        <p class="section-lede">Explore my interactive 3D character.</p>
 
-    <!-- CONTACT -->
-    <section class="contact" id="contact">
+        <div class="world3d-stage" id="world3d-stage">
+          <!-- EDIT 3D MODEL: this is a second, larger view of the same
+               avatar.glb file used in the hero. -->
+          <model-viewer
+            id="world-model-viewer"
+            class="model-viewer-el"
+            src="assets/models/avatar.glb"
+            alt="Large interactive 3D avatar of Muhammad Awais"
+            camera-controls
+            touch-action="pan-y"
+            auto-rotate
+            auto-rotate-delay="0"
+            rotation-per-second="12deg"
+            shadow-intensity="0.9"
+            exposure="1"
+            interaction-prompt="none"
+          ></model-viewer>
 
-        <h2>Let's Connect</h2>
+          <div class="avatar-loading" id="world-avatar-loading">
+            <span class="spinner" aria-hidden="true"></span>
+            <span>Loading 3D avatar…</span>
+          </div>
 
-        <p>
-            I am interested in learning, collaborating, and working
-            on meaningful projects.
-        </p>
+          <div class="avatar-fallback" id="world-avatar-fallback" hidden>
+            <span class="avatar-fallback-mark">AL</span>
+            <p>Add <code>avatar.glb</code> to <code>assets/models/</code> to display the 3D character.</p>
+          </div>
+        </div>
 
-        <br>
-
-        <p>
-            <strong>Email:</strong>
-            <a href="mailto:muhammadawais.sa07@gmail.com">
-                muhammadawais.sa07@gmail.com
-            </a>
-        </p>
-
-        <p>
-            <strong>Location:</strong>
-            Lahore, Pakistan
-        </p>
-
-        <p>
-            <strong>Phone:</strong>
-            +92 301 7374538
-        </p>
-
+        <p class="world3d-powered">Powered by Web 3D technology.</p>
+      </div>
     </section>
 
-
-    <!-- FOOTER -->
-    <footer>
-
-        <p>
-            © 2026 Muhammad Awais. All rights reserved.
+    <!-- ============================================================
+         CONTACT
+         ============================================================ -->
+    <section id="contact" class="section section-alt" aria-labelledby="contact-heading">
+      <div class="container">
+        <p class="section-eyebrow">Contact</p>
+        <h2 id="contact-heading" class="section-title">Let's Build Something Great.</h2>
+        <p class="section-lede">
+          I'm always interested in learning, creating, collaborating,
+          and exploring new opportunities.
         </p>
 
-        <p>
-            Built with HTML and CSS.
-        </p>
+        <!-- EDIT CONTACT -->
+        <div class="contact-grid">
+          <a href="mailto:muhammadawais.sa07@gmail.com" class="contact-tile">
+            <span class="contact-tile-label">Email</span>
+            <span class="contact-tile-value">muhammadawais.sa07@gmail.com</span>
+            <span class="btn btn-primary contact-tile-btn">Email Me</span>
+          </a>
+          <a href="tel:+923017374538" class="contact-tile">
+            <span class="contact-tile-label">Phone</span>
+            <span class="contact-tile-value">+92 301 7374538</span>
+            <span class="btn btn-ghost contact-tile-btn">Call Me</span>
+          </a>
+        </div>
 
-    </footer>
+        <p class="contact-location">Lahore, Pakistan</p>
 
+        <!-- Optional placeholders - add your real URLs here when ready. -->
+        <div class="contact-social">
+          <a href="#" class="contact-social-link" data-placeholder="true">GitHub (add your URL)</a>
+          <a href="#" class="contact-social-link" data-placeholder="true">LinkedIn (add your URL)</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================================================
+       FOOTER
+       ============================================================ -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div>
+        <p class="footer-brand">Awais Liaqat</p>
+        <p class="footer-title">Virtual Assistant | Team Leader | Marketing Specialist</p>
+        <p class="footer-quote">"Be perfect wherever you are."</p>
+      </div>
+      <p class="footer-copyright">© 2026 Awais Liaqat. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>

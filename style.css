@@ -1,0 +1,1181 @@
+/* ============================================================
+   1. VARIABLES
+   These are CSS "custom properties" - reusable values you can
+   change in ONE place and have them update everywhere on the
+   site. If you want to change the main colors, start here.
+   ============================================================ */
+:root {
+  /* Color - named per the design plan: void/panel are the dark
+     surfaces, signal-blue/signal-violet are the two accents,
+     ember is the single warm contrast color used only for
+     status/award moments. */
+  --void: #0A0E14;
+  --void-deep: #06090E;
+  --panel: #10151F;
+  --panel-hover: #151B28;
+  --border: rgba(255, 255, 255, 0.08);
+  --border-strong: rgba(255, 255, 255, 0.16);
+
+  --signal-blue: #4C8DFF;
+  --signal-blue-dim: rgba(76, 141, 255, 0.14);
+  --signal-violet: #8B7FFF;
+  --signal-violet-dim: rgba(139, 127, 255, 0.14);
+  --ember: #FFB454;
+
+  --text: #F3F5F9;
+  --text-muted: #9AA4B8;
+  --text-faint: #5C6478;
+
+  /* Type */
+  --font-display: "Space Grotesk", "Segoe UI", sans-serif;
+  --font-body: "Inter", "Segoe UI", sans-serif;
+
+  /* Layout */
+  --container-w: 1140px;
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --nav-h: 72px;
+
+  /* Motion */
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --dur-fast: 0.2s;
+  --dur-med: 0.5s;
+}
+
+/* ============================================================
+   2. RESET
+   Browsers apply their own default spacing/sizing to elements.
+   This section removes those defaults so we have a clean,
+   predictable base to design on top of.
+   ============================================================ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: var(--nav-h);
+}
+
+img,
+svg,
+model-viewer {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* Respect users who have asked their OS to reduce motion.
+   This overrides scroll-behavior and disables/shortens animations
+   site-wide. This is an accessibility requirement, not optional. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ============================================================
+   3. BODY / BASE
+   ============================================================ */
+body {
+  background: var(--void);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.container {
+  width: 100%;
+  max-width: var(--container-w);
+  margin-inline: auto;
+  padding-inline: 24px;
+}
+
+/* Visible keyboard focus state, applied consistently to every
+   interactive element. Never remove this without replacing it -
+   sighted keyboard users rely on it to know where they are. */
+a:focus-visible,
+button:focus-visible,
+model-viewer:focus-visible {
+  outline: 2px solid var(--signal-blue);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Skip link: invisible until a keyboard user tabs to it. */
+.skip-link {
+  position: fixed;
+  top: -100px;
+  left: 16px;
+  z-index: 1000;
+  background: var(--signal-blue);
+  color: var(--void);
+  padding: 12px 20px;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  transition: top var(--dur-fast) var(--ease);
+}
+
+.skip-link:focus {
+  top: 16px;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+
+.section-eyebrow {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--signal-blue);
+  margin-bottom: 12px;
+}
+
+.section-eyebrow-spaced {
+  margin-top: 64px;
+}
+
+.section-title {
+  font-size: clamp(28px, 4vw, 40px);
+  margin-bottom: 16px;
+}
+
+.section-lede {
+  color: var(--text-muted);
+  font-size: 17px;
+  max-width: 640px;
+  margin-bottom: 40px;
+}
+
+.section {
+  padding-block: 96px;
+  border-bottom: 1px solid var(--border);
+}
+
+.section-alt {
+  background: var(--void-deep);
+}
+
+/* ============================================================
+   4. BUTTONS (shared component)
+   ============================================================ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 28px;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  font-size: 15px;
+  transition: transform var(--dur-fast) var(--ease),
+              background var(--dur-fast) var(--ease),
+              border-color var(--dur-fast) var(--ease);
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+.btn-primary {
+  background: var(--signal-blue);
+  color: var(--void);
+}
+
+.btn-primary:hover {
+  background: #6da0ff;
+}
+
+.btn-ghost {
+  background: transparent;
+  border: 1px solid var(--border-strong);
+  color: var(--text);
+}
+
+.btn-ghost:hover {
+  border-color: var(--signal-blue);
+  background: var(--signal-blue-dim);
+}
+
+/* Status dot + label - the site's signature element. Reused in
+   the hero, the nav (active section indicator), and awards. */
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #4ADE80;
+  display: inline-block;
+  flex-shrink: 0;
+  box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.5);
+  animation: pulse-dot 2.4s ease-out infinite;
+}
+
+.status-dot-ember {
+  background: var(--ember);
+  box-shadow: 0 0 0 0 rgba(255, 180, 84, 0.5);
+  animation: pulse-dot-ember 2.4s ease-out infinite;
+}
+
+@keyframes pulse-dot {
+  0% { box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.45); }
+  70% { box-shadow: 0 0 0 8px rgba(74, 222, 128, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(74, 222, 128, 0); }
+}
+
+@keyframes pulse-dot-ember {
+  0% { box-shadow: 0 0 0 0 rgba(255, 180, 84, 0.45); }
+  70% { box-shadow: 0 0 0 8px rgba(255, 180, 84, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(255, 180, 84, 0); }
+}
+
+.status-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 28px;
+  padding: 10px 16px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-muted);
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(8px);
+}
+
+/* Pills, used for interests and skill tags */
+.pill-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.pill {
+  font-size: 14px;
+  font-weight: 500;
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  background: var(--panel);
+  transition: border-color var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease);
+}
+
+.pill-accent {
+  border-color: rgba(139, 127, 255, 0.35);
+  color: #c7c2ff;
+  background: var(--signal-violet-dim);
+}
+
+/* ============================================================
+   5. NAVIGATION
+   ============================================================ */
+.nav-wrap {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(10, 14, 20, 0.72);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border);
+}
+
+.nav {
+  height: var(--nav-h);
+  max-width: var(--container-w);
+  margin-inline: auto;
+  padding-inline: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-logo-mark {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 18px;
+  letter-spacing: 0.02em;
+  color: var(--text);
+  border: 1px solid var(--border-strong);
+  border-radius: 8px;
+  width: 40px;
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-links {
+  display: none;
+  align-items: center;
+  gap: 4px;
+}
+
+.nav-link {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-muted);
+  padding: 8px 14px;
+  border-radius: var(--radius-sm);
+  transition: color var(--dur-fast) var(--ease), background var(--dur-fast) var(--ease);
+}
+
+.nav-link:hover {
+  color: var(--text);
+  background: var(--panel-hover);
+}
+
+.nav-link.is-active {
+  color: var(--signal-blue);
+}
+
+/* Hamburger button */
+.nav-toggle {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+}
+
+.nav-toggle-bar {
+  width: 22px;
+  height: 2px;
+  background: var(--text);
+  border-radius: 2px;
+  transition: transform var(--dur-fast) var(--ease), opacity var(--dur-fast) var(--ease);
+}
+
+.nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(2) {
+  opacity: 0;
+}
+
+.nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* Mobile menu: drops down from the top of the nav. Height is
+   animated via grid-template-rows so it can go from 0 to auto
+   smoothly (a plain max-height animation would need a guessed
+   pixel value). */
+.mobile-menu {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows var(--dur-med) var(--ease);
+  background: var(--void-deep);
+  border-bottom: 1px solid var(--border);
+}
+
+.mobile-menu.is-open {
+  grid-template-rows: 1fr;
+}
+
+.mobile-menu-links {
+  overflow: hidden;
+  padding-inline: 24px;
+}
+
+.mobile-menu.is-open .mobile-menu-links {
+  padding-block: 12px;
+}
+
+.mobile-menu-link {
+  display: block;
+  padding: 14px 4px;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border);
+}
+
+.mobile-menu-links li:last-child .mobile-menu-link {
+  border-bottom: none;
+}
+
+.mobile-menu-link:hover,
+.mobile-menu-link:focus-visible {
+  color: var(--signal-blue);
+}
+
+/* When JS hasn't run yet or fails, [hidden] keeps this off-screen
+   and out of the accessibility tree entirely. */
+.mobile-menu[hidden] {
+  display: none;
+}
+
+/* ============================================================
+   6. HERO
+   ============================================================ */
+.hero {
+  position: relative;
+  min-height: calc(100svh - var(--nav-h));
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  padding-block: 64px;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.hero-grid {
+  position: absolute;
+  inset: -1px;
+  background-image:
+    linear-gradient(var(--border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 30%, black 0%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 30%, black 0%, transparent 75%);
+  opacity: 0.5;
+}
+
+.hero-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  opacity: 0.35;
+  animation: drift 18s ease-in-out infinite alternate;
+}
+
+.hero-blob-a {
+  width: 420px;
+  height: 420px;
+  background: var(--signal-blue);
+  top: -10%;
+  right: 5%;
+}
+
+.hero-blob-b {
+  width: 320px;
+  height: 320px;
+  background: var(--signal-violet);
+  bottom: -10%;
+  left: -5%;
+  animation-delay: -6s;
+}
+
+@keyframes drift {
+  from { transform: translate(0, 0) scale(1); }
+  to { transform: translate(-30px, 30px) scale(1.08); }
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 56px;
+  align-items: center;
+}
+
+.eyebrow {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+}
+
+.hero-name {
+  font-size: clamp(40px, 8vw, 68px);
+  background: linear-gradient(120deg, var(--text) 40%, var(--signal-blue) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.hero-title {
+  font-size: clamp(16px, 2.4vw, 19px);
+  font-weight: 500;
+  color: var(--text-muted);
+  margin-top: 14px;
+}
+
+.hero-desc {
+  max-width: 480px;
+  color: var(--text-muted);
+  margin-top: 20px;
+  font-size: 16px;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 32px;
+}
+
+/* 3D avatar stage */
+.hero-avatar-wrap {
+  display: flex;
+  justify-content: center;
+}
+
+.avatar-stage {
+  position: relative;
+  width: min(100%, 420px);
+  aspect-ratio: 1 / 1.05;
+  border-radius: var(--radius-lg);
+  background: radial-gradient(circle at 50% 30%, var(--panel-hover), var(--panel) 70%);
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+
+.model-viewer-el {
+  width: 100%;
+  height: 100%;
+  --poster-color: transparent;
+}
+
+.avatar-loading,
+.avatar-fallback {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  text-align: center;
+  padding: 24px;
+  color: var(--text-muted);
+  font-size: 14px;
+  background: var(--panel);
+  transition: opacity var(--dur-med) var(--ease);
+}
+
+.avatar-loading[hidden],
+.avatar-fallback[hidden] {
+  display: none;
+}
+
+.avatar-fallback-mark {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 28px;
+  color: var(--text-faint);
+  border: 1px solid var(--border-strong);
+  border-radius: 14px;
+  width: 64px;
+  height: 64px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.avatar-fallback code {
+  background: rgba(255, 255, 255, 0.06);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 13px;
+}
+
+.spinner {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 2.5px solid var(--border-strong);
+  border-top-color: var(--signal-blue);
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.scroll-cue {
+  position: absolute;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+  width: 24px;
+  height: 38px;
+  border: 1px solid var(--border-strong);
+  border-radius: 14px;
+  display: flex;
+  justify-content: center;
+  padding-top: 8px;
+}
+
+.scroll-cue span {
+  width: 4px;
+  height: 8px;
+  border-radius: 2px;
+  background: var(--signal-blue);
+  animation: scroll-cue-move 1.8s ease-in-out infinite;
+}
+
+@keyframes scroll-cue-move {
+  0% { transform: translateY(0); opacity: 1; }
+  70% { transform: translateY(10px); opacity: 0; }
+  100% { opacity: 0; }
+}
+
+/* ============================================================
+   7. ABOUT
+   ============================================================ */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+}
+
+.about-copy p {
+  color: var(--text-muted);
+  margin-bottom: 16px;
+  max-width: 60ch;
+}
+
+.about-interests-label {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+  margin-top: 28px;
+}
+
+.stat-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  align-content: start;
+}
+
+.stat-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 24px;
+  transition: border-color var(--dur-fast) var(--ease), transform var(--dur-fast) var(--ease);
+}
+
+.stat-card:hover {
+  border-color: var(--signal-blue);
+  transform: translateY(-3px);
+}
+
+.stat-card-wide {
+  grid-column: 1 / -1;
+}
+
+.stat-value {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--signal-blue);
+}
+
+.stat-value-sm {
+  font-size: 17px;
+  line-height: 1.35;
+}
+
+.stat-label {
+  margin-top: 6px;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+/* ============================================================
+   8. EXPERIENCE (timeline)
+   ============================================================ */
+.timeline {
+  position: relative;
+  padding-left: 28px;
+  border-left: 1px solid var(--border-strong);
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.timeline-item {
+  position: relative;
+}
+
+.timeline-node {
+  position: absolute;
+  left: -33px;
+  top: 6px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--signal-blue);
+  box-shadow: 0 0 0 4px var(--void);
+}
+
+.timeline-period {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--signal-blue);
+  letter-spacing: 0.03em;
+  margin-bottom: 6px;
+}
+
+.timeline-role {
+  font-size: 19px;
+  margin-bottom: 4px;
+}
+
+.timeline-org {
+  color: var(--text-muted);
+  font-size: 15px;
+}
+
+/* ============================================================
+   9. SKILLS
+   ============================================================ */
+.skills-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 28px;
+}
+
+.skill-group-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-faint);
+  letter-spacing: 0.03em;
+  margin-bottom: 4px;
+}
+
+/* ============================================================
+   10. EDUCATION / LANGUAGES
+   ============================================================ */
+.edu-grid,
+.lang-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+.edu-card,
+.lang-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 22px;
+}
+
+.edu-period {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--signal-blue);
+  margin-bottom: 8px;
+}
+
+.edu-name {
+  font-size: 18px;
+  margin-bottom: 6px;
+}
+
+.edu-org,
+.edu-note {
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+.edu-note {
+  margin-top: 4px;
+}
+
+.lang-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.lang-name {
+  font-weight: 600;
+}
+
+.lang-level {
+  font-size: 13px;
+  color: var(--signal-blue);
+  font-weight: 600;
+}
+
+/* ============================================================
+   11. AWARDS
+   ============================================================ */
+.awards-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+.award-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 22px;
+}
+
+.award-card .status-dot {
+  margin-top: 6px;
+}
+
+.award-name {
+  font-size: 17px;
+  margin-bottom: 4px;
+}
+
+.award-org {
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+/* ============================================================
+   12. PROJECTS
+   ============================================================ */
+.projects-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+.project-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 26px;
+  transition: border-color var(--dur-fast) var(--ease), transform var(--dur-fast) var(--ease);
+}
+
+.project-card:hover {
+  border-color: var(--signal-violet);
+  transform: translateY(-3px);
+}
+
+.project-tag {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ember);
+  background: rgba(255, 180, 84, 0.1);
+  padding: 4px 10px;
+  border-radius: 999px;
+  margin-bottom: 14px;
+}
+
+.project-name {
+  font-size: 19px;
+  margin-bottom: 8px;
+}
+
+.project-desc {
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+.projects-more {
+  text-align: center;
+  color: var(--text-faint);
+  font-size: 14px;
+  margin-top: 36px;
+}
+
+/* ============================================================
+   13. 3D WORLD
+   ============================================================ */
+.world3d-section .container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.world3d-section .section-lede {
+  margin-inline: auto;
+}
+
+.world3d-stage {
+  position: relative;
+  width: 100%;
+  max-width: 720px;
+  aspect-ratio: 16 / 11;
+  border-radius: var(--radius-lg);
+  background: radial-gradient(circle at 50% 30%, var(--panel-hover), var(--panel) 70%);
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+
+.world3d-powered {
+  margin-top: 20px;
+  font-size: 13px;
+  color: var(--text-faint);
+  letter-spacing: 0.03em;
+}
+
+/* ============================================================
+   14. CONTACT
+   ============================================================ */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  margin-top: 8px;
+}
+
+.contact-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 28px;
+  transition: border-color var(--dur-fast) var(--ease), transform var(--dur-fast) var(--ease);
+}
+
+.contact-tile:hover {
+  border-color: var(--signal-blue);
+  transform: translateY(-3px);
+}
+
+.contact-tile-label {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+
+.contact-tile-value {
+  font-size: 17px;
+  font-weight: 600;
+  word-break: break-word;
+}
+
+.contact-tile-btn {
+  margin-top: 12px;
+  pointer-events: none;
+}
+
+.contact-location {
+  margin-top: 28px;
+  color: var(--text-muted);
+  font-size: 15px;
+}
+
+.contact-social {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.contact-social-link {
+  font-size: 13px;
+  color: var(--text-faint);
+  border-bottom: 1px dashed var(--border-strong);
+  padding-bottom: 2px;
+}
+
+.contact-social-link:hover {
+  color: var(--signal-blue);
+  border-color: var(--signal-blue);
+}
+
+/* ============================================================
+   15. FOOTER
+   ============================================================ */
+.footer {
+  padding-block: 48px;
+  background: var(--void-deep);
+}
+
+.footer-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.footer-brand {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.footer-title {
+  color: var(--text-muted);
+  font-size: 14px;
+  margin-top: 4px;
+}
+
+.footer-quote {
+  color: var(--text-faint);
+  font-size: 14px;
+  font-style: italic;
+  margin-top: 10px;
+}
+
+.footer-copyright {
+  color: var(--text-faint);
+  font-size: 13px;
+}
+
+/* ============================================================
+   16. SCROLL REVEAL ANIMATION
+   Elements with class="reveal" start slightly lower and
+   transparent, then animate in when script.js adds the
+   "is-visible" class (triggered by IntersectionObserver as the
+   element scrolls into view).
+   ============================================================ */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity var(--dur-med) var(--ease), transform var(--dur-med) var(--ease);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+  .hero-blob,
+  .status-dot,
+  .scroll-cue span,
+  .spinner {
+    animation: none;
+  }
+}
+
+/* ============================================================
+   17. RESPONSIVE STYLES
+   Mobile-first: all rules above this point are the mobile
+   layout. Larger screens are layered on top with min-width
+   media queries.
+   ============================================================ */
+
+/* Tablet and up */
+@media (min-width: 700px) {
+  .stat-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .edu-grid,
+  .lang-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .awards-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .contact-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .skills-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Small desktop and up: switch to the two-column hero/about
+   layout, and show the desktop nav instead of the hamburger. */
+@media (min-width: 960px) {
+  .nav-links {
+    display: flex;
+  }
+
+  .nav-toggle {
+    display: none;
+  }
+
+  .mobile-menu {
+    display: none;
+  }
+
+  .hero-inner {
+    grid-template-columns: 1.1fr 0.9fr;
+  }
+
+  .hero-text {
+    text-align: left;
+  }
+
+  .about-grid {
+    grid-template-columns: 1.1fr 1fr;
+  }
+
+  .projects-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .skills-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Large desktop */
+@media (min-width: 1280px) {
+  .lang-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
