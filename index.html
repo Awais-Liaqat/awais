@@ -1,9 +1,624 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Muhammad Awais Portfolio</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Muhammad Awais | Portfolio</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f5f7fa;
+            color: #1f2937;
+            line-height: 1.6;
+        }
+
+        header {
+            background: #111827;
+            color: white;
+            padding: 20px 8%;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        nav a:hover {
+            color: #60a5fa;
+        }
+
+        .hero {
+            min-height: 90vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 60px 20px;
+            background: linear-gradient(135deg, #111827, #2563eb);
+            color: white;
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-size: 55px;
+            margin-bottom: 15px;
+        }
+
+        .hero h2 {
+            font-size: 24px;
+            font-weight: normal;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 12px 25px;
+            background: white;
+            color: #1d4ed8;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            margin: 5px;
+        }
+
+        .button:hover {
+            transform: translateY(-2px);
+        }
+
+        section {
+            padding: 70px 8%;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        section h2 {
+            text-align: center;
+            font-size: 34px;
+            margin-bottom: 40px;
+            color: #111827;
+        }
+
+        .about {
+            max-width: 850px;
+            margin: auto;
+            text-align: center;
+            font-size: 18px;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        .card h3 {
+            color: #2563eb;
+            margin-bottom: 8px;
+        }
+
+        .card h4 {
+            margin-bottom: 10px;
+            color: #374151;
+        }
+
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .skill {
+            background: white;
+            padding: 12px 18px;
+            border-radius: 25px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+            font-weight: bold;
+        }
+
+        .timeline-item {
+            background: white;
+            padding: 25px;
+            margin-bottom: 20px;
+            border-left: 5px solid #2563eb;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.07);
+        }
+
+        .timeline-item h3 {
+            color: #2563eb;
+        }
+
+        .award {
+            text-align: center;
+        }
+
+        .award h3 {
+            font-size: 22px;
+            color: #2563eb;
+        }
+
+        .contact {
+            text-align: center;
+            background: #111827;
+            color: white;
+            max-width: none;
+        }
+
+        .contact h2 {
+            color: white;
+        }
+
+        .contact a {
+            color: #93c5fd;
+            text-decoration: none;
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            background: #030712;
+            color: white;
+        }
+
+        @media (max-width: 700px) {
+            .hero h1 {
+                font-size: 38px;
+            }
+
+            .hero h2 {
+                font-size: 20px;
+            }
+
+            nav {
+                gap: 15px;
+            }
+
+            nav ul {
+                gap: 10px;
+                font-size: 14px;
+            }
+        }
+    </style>
 </head>
+
 <body>
-    <h1>Hi, my name is Muhammad Awais</h1>
-    <p>Welcome to my portfolio. I am learning web development.</p>
+
+    <!-- NAVIGATION -->
+    <header>
+        <nav>
+            <div class="logo">Muhammad Awais</div>
+
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#awards">Awards</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+
+    <!-- HOME -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+
+            <h1>Hi, I'm Muhammad Awais</h1>
+
+            <h2>
+                Virtual Assistant | Team Leader | Marketing Specialist
+            </h2>
+
+            <p>
+                Welcome to my personal portfolio. I am passionate about
+                leadership, sales, digital marketing, AI, automation,
+                technology, and continuous learning.
+            </p>
+
+            <a class="button" href="#about">Explore My Portfolio</a>
+
+            <a class="button" href="#contact">Contact Me</a>
+
+        </div>
+    </section>
+
+
+    <!-- ABOUT -->
+    <section id="about">
+
+        <h2>About Me</h2>
+
+        <div class="about">
+
+            <p>
+                I am Muhammad Awais, a Virtual Assistant, Team Leader,
+                and Marketing Specialist based in Lahore, Pakistan.
+            </p>
+
+            <br>
+
+            <p>
+                I have experience in remote operations, administration,
+                sales, marketing, team leadership, client communication,
+                and digital work.
+            </p>
+
+            <br>
+
+            <p>
+                I am also interested in AI Automation, Agentic AI,
+                Generative AI, e-commerce, social media marketing,
+                and technology.
+            </p>
+
+            <br>
+
+            <p>
+                My goal is to continuously develop my skills, take on
+                challenging projects, and build useful solutions while
+                learning new technologies.
+            </p>
+
+            <br>
+
+            <p>
+                <strong>My philosophy:</strong>
+                "Be perfect wherever you are."
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- EXPERIENCE -->
+    <section id="experience">
+
+        <h2>Work Experience</h2>
+
+        <div class="timeline-item">
+
+            <h3>Virtual Assistant & Manager</h3>
+
+            <h4>Self-Employed / Remote | 2023 – 2026</h4>
+
+            <p>
+                Managed administrative operations, coordinated schedules,
+                and handled client communication across remote projects.
+            </p>
+
+        </div>
+
+
+        <div class="timeline-item">
+
+            <h3>Marketing Manager & Specialist</h3>
+
+            <h4>Studio Shade | 2023 – 2026</h4>
+
+            <p>
+                Maintained brand consistency, built vendor and agency
+                partnerships, and coordinated multi-channel marketing
+                campaigns.
+            </p>
+
+        </div>
+
+
+        <div class="timeline-item">
+
+            <h3>Sales Representative & Team Leader</h3>
+
+            <h4>Sales Division | 2025 · 3 Months</h4>
+
+            <p>
+                Led a 14-member sales team and worked toward exceeding
+                sales targets. Earned the Salesman of the Month award
+                in 2025.
+            </p>
+
+        </div>
+
+
+        <div class="timeline-item">
+
+            <h3>Community Volunteer</h3>
+
+            <h4>Youth Force | 2025</h4>
+
+            <p>
+                Contributed to community well-being initiatives and
+                demonstrated leadership through volunteer activities.
+            </p>
+
+        </div>
+
+
+        <div class="timeline-item">
+
+            <h3>Worker</h3>
+
+            <h4>Helping Hands | 2022 – 2023</h4>
+
+            <p>
+                Completed assigned tasks within deadlines while
+                maintaining quality and safety standards.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- SKILLS -->
+    <section id="skills">
+
+        <h2>My Skills</h2>
+
+        <div class="skills">
+
+            <div class="skill">Team Leadership</div>
+
+            <div class="skill">Sales & Communication</div>
+
+            <div class="skill">AI Automation</div>
+
+            <div class="skill">Agentic AI</div>
+
+            <div class="skill">Generative AI</div>
+
+            <div class="skill">Social Media Marketing</div>
+
+            <div class="skill">E-commerce</div>
+
+            <div class="skill">Video Editing</div>
+
+            <div class="skill">Time Management</div>
+
+            <div class="skill">MS Office</div>
+
+            <div class="skill">Email Handling</div>
+
+            <div class="skill">Data Entry</div>
+
+        </div>
+
+    </section>
+
+
+    <!-- EDUCATION -->
+    <section id="education">
+
+        <h2>Education</h2>
+
+        <div class="cards">
+
+            <div class="card">
+
+                <h3>ICS with Physics</h3>
+
+                <h4>
+                    Govt. Graduate College of Science
+                </h4>
+
+                <p>
+                    Lahore
+                </p>
+
+                <p>
+                    2025 – Present
+                </p>
+
+                <p>
+                    Currently studying in the second year of
+                    Intermediate/ICS with Physics.
+                </p>
+
+            </div>
+
+
+            <div class="card">
+
+                <h3>Matric — Science</h3>
+
+                <h4>
+                    Dawood Education Complex H/S/S for Boys
+                </h4>
+
+                <p>
+                    Pakpattan
+                </p>
+
+                <p>
+                    Completed in 2025
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- LANGUAGES -->
+    <section>
+
+        <h2>Languages</h2>
+
+        <div class="skills">
+
+            <div class="skill">English — Fluent</div>
+
+            <div class="skill">Urdu — Fluent</div>
+
+            <div class="skill">Punjabi — Fluent</div>
+
+        </div>
+
+    </section>
+
+
+    <!-- AWARDS -->
+    <section id="awards">
+
+        <h2>Achievements & Awards</h2>
+
+        <div class="cards">
+
+            <div class="card award">
+
+                <h3>Salesman of the Month</h3>
+
+                <p>
+                    Sales Division — 2025
+                </p>
+
+                <p>
+                    Recognized for sales performance and achievement.
+                </p>
+
+            </div>
+
+
+            <div class="card award">
+
+                <h3>Best Team Leader Award</h3>
+
+                <p>
+                    Youth Force — 2025
+                </p>
+
+                <p>
+                    Recognized for leadership and initiative in
+                    community activities.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- FUTURE PROJECTS -->
+    <section>
+
+        <h2>Projects & Future Work</h2>
+
+        <div class="about">
+
+            <p>
+                I am continuously learning and building new projects
+                in web development, AI, automation, digital marketing,
+                and technology.
+            </p>
+
+            <br>
+
+            <p>
+                This section will be updated as I complete and publish
+                new projects.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- CONTACT -->
+    <section class="contact" id="contact">
+
+        <h2>Let's Connect</h2>
+
+        <p>
+            I am interested in learning, collaborating, and working
+            on meaningful projects.
+        </p>
+
+        <br>
+
+        <p>
+            <strong>Email:</strong>
+            <a href="mailto:muhammadawais.sa07@gmail.com">
+                muhammadawais.sa07@gmail.com
+            </a>
+        </p>
+
+        <p>
+            <strong>Location:</strong>
+            Lahore, Pakistan
+        </p>
+
+        <p>
+            <strong>Phone:</strong>
+            +92 301 7374538
+        </p>
+
+    </section>
+
+
+    <!-- FOOTER -->
+    <footer>
+
+        <p>
+            © 2026 Muhammad Awais. All rights reserved.
+        </p>
+
+        <p>
+            Built with HTML and CSS.
+        </p>
+
+    </footer>
+
 </body>
 </html>
